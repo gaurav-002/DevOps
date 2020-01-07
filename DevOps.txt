@@ -1,0 +1,142 @@
+3 MODULES IN DEVOPS 
+
+
+
+1. MAVEN
+2. GIT
+3. JENKINS
+
+
+MAVEN IS A BUILD TOOL AND THE PURPOSE OF MAVEN IS - 
+
+- IT IS PRIMARILY USED FOR DEPENDENCY MANAGEMENT AND VERSION CONTROLLING.
+
+- IT MANAGES DIRECT DEPENDENCIES AS WELL AS TRANSITIVE DEPENDENCIES REFER MAVEN DIAGRAM.
+
+- IT WILL GO AND CREATE A DEFAULT DIRECTORY STRUCTURE AS PER YOUR PROJECT REQUIREMENT.
+
+- IT WILL HELP US IN THE MANAGING A BUILD LIFECYCLE OF A PROJECT.
+
+
+IT IS A JAVA BUILD TOOL
+
+
+MAVEN INSTALLATION STEPS
+DOWNLOAD MAVEN ZIP AND EXTRACT IT AS WELL AS COPY THE PATH OF THE LOCATION IT IS EXTRACTED IN.
+OPEN ENVIRONMENT VARIABLES AND ADD "M2_HOME" IN SYSTEM OR USER VARIABLE AND GIVE IT THE PATH COPIED.
+ADD "JAVA_HOME" IF NOT ALREADY DONE.
+"Path" VARIABLE NEED TO HAVE PATH OF MAVEN UPTO BIN IN IT AS ONE OF THE ENTRIES
+
+MAVEN ARCHETYPE LINK
+
+http://repo.maven.apache.org/maven2/archetype-catalog.xml
+
+
+COMMAND TO CREATE A MAVEN PROJECT
+>mvn archetype:generate
+
+groupId : package name
+artifactId: project name
+version : project version
+
+
+pom(project object model)
+pom.xml act as a config file for our project
+
+target folder holds the final deployable file.
+in the console based app it will be a jar file.
+in case of web based app it will be a war file.
+it will also holds the class files for the java which are there in src.
+default packaging for maven is going to be a ".jar"
+
+artifactID and name in pom.xml may or maynot be same
+
+for taking a maven update
+-right click on project
+-go to maven section
+-click on update project
+- we usually take a forcefull update
+
+there are dependancies defined in the dioendancies section in pom.xml
+dependancy have three important tags
+-gropuId
+-artifactId
+-version
+
+if we want to clear maven repository just delete the jars and update the project. it will automatically re-download the required jars.
+
+
+
+PHASES OF BUILD LIFECYCLE.
+1. VALIDATE (CHECKS CONTENT OF pom.xml FILE)
+
+2. CLEAN (IT WILL REMOVE EVERYTHING(.war,.jar,.class files) FROM THE 'TARGET' FOLDER)[NEED TO SPECIFY EXPLICITLY]
+
+3. COMPILE (COMPILES ALL THE JAVA CODE PRESENT IN THE PROJECT.(SRC). AFTER COMPILATION, IT STORES ALL COMPILES .CLASS FILES IN TARGET FOLDER)
+
+4. TEST (EXECUTES TEST CODE, PRESRNT IN SRC/TEST. IT WILL GIVE YOU A REPORT. DISPLAYS SUCCESS/FAILURE RATE.)
+
+5. PACKAGE (THIS BUILD PHASE IS GOING TO PACKAGE/CREATE OUR PROJECT INTO A SINGLE .JAR OR .WAR FILE DEPENDING UPON THE PROJECT. 
+	   '<packaging></packaging>' IS A TAG TO SPECIFY PACKAGE. GENERATED .JAR FILE NAME WILL BE 'ARTIFACT_ID-VERSION'. 
+	    WILL STORE THIS CREATED JAR FILE IN TARGET FOLDER).
+
+6. INSTALL (INSTALL OUR JAR FILE INTO LOCAL REPOSITORY, NOT IN ANY SERVER OR MAVEN CENTRAL REPOSITORY)
+
+
+
+
+JUNIT IS ONE OF THE MOST POPULAR TEST MODULE
+In JUnit4 there is an annotation called as @Test which is used to mark a method as a test case.
+fail is one of the method which is used from org.junit.Assert class.
+there are many static methods like
+assertTrue
+assertFalse
+assertEquals
+assertNotEquals
+assertNull
+assertNotNull
+
+this is known as static import 
+
+import static package_name.class_name.method_name;
+
+to execute any class from the jar file
+>java -cp target\Customer_Details-1.0-SNAPSHOT.jar com.lti.Main
+
+
+To create a maven project with eclipse.
+select new> other > meven_project> configure > add-remote-cataloge > http://repo.maven.apache.org/maven2/archetype-catalog.xml > (in filter : 'maven-archetype-webapp[latest version] >') > give groupId,archetype > create
+
+it will give error bcoz we have to add servlet-api.jar and jsp-api.jar expicitly.
+
+to add them go to
+[for servlet]
+-maven central repository on google
+-search javax.servlet > servlet-api
+- copy the dependancy
+-add dependancy into pom.xml
+[for jsp]
+-maven central repository on google
+-search javax.servlet > jsp-api
+- copy the dependancy
+-add dependancy into pom.xml
+
+how to deploy a .war file on server
+
+go to bin directory of tomcat and open cmd from there
+>startup.bat
+
+if its giving error of port no. is already in use then we have to change the port number 
+
+to change the port no. of tomcat without eclipse
+-go to tomcat directory
+-go to conf folder
+-open server.xml file
+-change the port number from 8080 to 9090. ()
+-[to check if succeed] go to http://localhost:9090.
+- to deploy project click on manager app on same page
+- for username and pass open tomcat-users.xml file
+- uncomment the <role> and <user> tags.
+- add a new user. change name and password and give role as 'manager-gui'.
+- close the server with >shutdown.bat
+- start the server 
